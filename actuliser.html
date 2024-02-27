@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualiser</title>
+</head>
+<body>
+    <div>
+        <input id="input" type="text">
+        <button type="button" id="ajouter" >Ajouter</button>
+    </div>
+    <button type="button" id="actualiser">Actualiser</button>
+    <script>
+         // Liste des URLs des pages à actualiser
+ var urls = [
+    "https://dictionaryapi.dev/",
+    "https://translate.google.com/?hl=fr",
+    // Ajoutez autant d'URLs que nécessaire
+];
+let actuliser = document.getElementById("actualiser")
+let ajouter = document.getElementById("ajouter")
+let input = document.getElementById("input")
+ajouter.addEventListener("click", function(){
+    ajouterLien()
+    console.log(urls)
+})
+
+function ajouterLien(){
+    url = input.value
+    urls.push(url)
+}
+
+actuliser.addEventListener('click',function(){ 
+    window.onload = ouvrirEtActualiserPages();
+})
+
+
+function ouvrirEtActualiserPages() {
+    // Pour chaque URL, ouvre une nouvelle fenêtre ou onglet et actualise la page
+    urls.forEach(function(url) {
+        // Ouvre une nouvelle fenêtre ou onglet avec l'URL spécifiée
+        var nouvelleFenetre = window.open(url, '_blank');
+        
+
+        // Actualise la page dans la nouvelle fenêtre ou onglet toutes les 5 secondes
+        setInterval(function actualiserPage() {
+            if (window && window.location) {
+                window.location.reload();
+            } else {
+                console.error("Window or window.location is null.");
+            }
+        },5000);
+    });
+}
+
+    </script>
+</body>
+</html>
